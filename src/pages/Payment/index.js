@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
-import UserContext from '../../contexts/UserContext';
+import useEnrollment from '../../hooks/api/useEnrollment';
 
 export default function Payment() {
-  const { enrollment } = useContext(UserContext);
+  const { enrollment } = useEnrollment();
 
   if (!enrollment) {
     return (
