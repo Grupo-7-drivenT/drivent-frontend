@@ -1,3 +1,9 @@
-export default function Payment() {
-  return 'Pagamento: Em breve!';
+import React from 'react';
+import Payment from '../../../pages/Payment';
+
+export default function SubscriptionPayment() {
+  return (
+    <Payment />
+  );
 }
+
