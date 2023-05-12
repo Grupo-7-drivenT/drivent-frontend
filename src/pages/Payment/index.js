@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import useEnrollment from '../../hooks/api/useEnrollment';
+import ChooseTicketType from '../Dashboard/Payment/chooseTicketType';
 
 export default function Payment() {
   const { enrollment } = useEnrollment();
@@ -20,10 +20,18 @@ export default function Payment() {
 
   return (
     <>
-      {/* Restante do código para quando o usuário está inscrito */}
+      <Title>Ingresso e Pagamentos</Title>
+      <ChooseTicketType />
     </>
   );
 }
+
+const Title = styled.div`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  color: '#000000';
+`;
 
 const TitleTypography = styled(Typography)`
   margin-bottom: 20px !important;
@@ -41,4 +49,3 @@ const CustomCenter = styled.div`
   text-align: center;
   color: #8e8e8e;
 `;
-
