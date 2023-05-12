@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 160px;
   margin-top: 37px;
+
   h1 {
     font-family: 'Roboto';
     font-style: normal;
@@ -11,6 +12,8 @@ export const Wrapper = styled.div`
     font-size: 20px;
     line-height: 23px;
     color: #8e8e8e;
+    margin-bottom: 15px;
+    margin-top: 15px;
   }
 `;
 
@@ -27,4 +30,5 @@ export const SquareButtom = styled.button`
   width: 145px;
   height: 145px;
   border-radius: 20px;
+  margin-right: 10px;
 `;
