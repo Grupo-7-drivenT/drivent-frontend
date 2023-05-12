@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background-color: red;
   width: 100%;
   height: 160px;
   margin-top: 37px;
@@ -21,12 +20,11 @@ export const ButtomWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  background-color: blue;
 `;
 
 export const SquareButtom = styled.button`
+  background-color: white;
   width: 145px;
   height: 145px;
   border-radius: 20px;
-  background-color: yellow;
 `;

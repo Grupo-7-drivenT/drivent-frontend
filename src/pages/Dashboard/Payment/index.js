@@ -1,18 +1,6 @@
-import styled from 'styled-components';
-import ChooseTicketType from './chooseTicketType';
+import React from 'react';
+import Payment from '../../../pages/Payment';
 
-export default function Payment() {
-  return (
-    <>
-      <Title>Ingresso e Pagamentos</Title>
-      <ChooseTicketType />
-    </>
-  );
+export default function SubscriptionPayment() {
+  return <Payment />;
 }
-
-const Title = styled.div`
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-  font-size: 34px;
-  color: '#000000';
-`;
