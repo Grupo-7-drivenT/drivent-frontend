@@ -42,7 +42,7 @@ export default function ChooseTicketType() {
   function hadleFinishButtomClick() {
     let ticketTypeId;
 
-    //Felipe, pegar os ticketsTypesId do banco
+    //Felipe, pegar os ticketsTypesId do banco e passar para parte do cartão
     if (ticketPrice === 100) ticketTypeId = 30;
     if (ticketPrice === 250) ticketTypeId = 31;
     if (ticketPrice === 600) ticketTypeId = 32;
@@ -51,7 +51,7 @@ export default function ChooseTicketType() {
 
     alert('Tiquete reservado!');
   }
-
+  // Pode substituir pelos atributos do ticketType vindo da API
   return (
     <Wrapper>
       <h1>Primeiro, escolha sua modalidade de ingresso</h1>
