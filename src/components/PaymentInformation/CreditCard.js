@@ -37,6 +37,10 @@ export default function CreditCardInformation({ isPaid }) {
     }
     fetchData();
   }, []);
+  
+  console.log(userData.user.id, 'response');
+  console.log(ticketId, 'ticketId', cardData, 'cardData');
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'number') {
@@ -62,6 +66,7 @@ export default function CreditCardInformation({ isPaid }) {
       URL,
       {
         ticketId: ticketId,
+        userId: userData.user.id,
         cardData: {
           issuer: cardData.issuer,
           number: +cardData.number,
