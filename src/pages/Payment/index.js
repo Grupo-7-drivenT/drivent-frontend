@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 import useEnrollment from '../../hooks/api/useEnrollment';
+import CreditCardInformation from '../../components/PaymentInformation/CreditCard';
 import ChooseTicketType from '../Dashboard/Payment/chooseTicketType';
 
 export default function Payment() {
@@ -10,6 +11,7 @@ export default function Payment() {
     return (
       <>
         <TitleTypography variant="h4">Ingresso e pagamento</TitleTypography>
+        <CreditCardInformation></CreditCardInformation>
         <CustomCenter>
           Você precisa completar sua inscrição antes
           <br /> de prosseguir para a escolha de ingresso
@@ -21,7 +23,8 @@ export default function Payment() {
   return (
     <>
       <Title>Ingresso e Pagamentos</Title>
-      <ChooseTicketType />
+      {/* <ChooseTicketType /> */}
+      <CreditCardInformation/>
     </>
   );
 }
