@@ -23,8 +23,8 @@ export default function Payment() {
   return (
     <>
       <Title>Ingresso e Pagamentos</Title>
-      {<ChooseTicketType />}
-      <CreditCardInformation />
+      <ChooseTicketType />
+      {/* <CreditCardInformation /> */}
     </>
   );
 }

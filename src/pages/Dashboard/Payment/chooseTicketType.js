@@ -1,3 +1,4 @@
+import useTicket from '../../../hooks/api/useTicket';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useToken from '../../../hooks/useToken';
 import { createTicket } from '../../../services/ticketApi';
@@ -13,6 +14,7 @@ export default function ChooseTicketType() {
   const [ticketPrice, setTicketPrice] = useState(0);
   const [showHotelOptions, setShowHotelOptions] = useState(false);
   const [hotelOptionSelected, setHotelOptionSelected] = useState('');
+  const [createdTicket, setCreatedTicket] = useState({});
 
   function handleButton1Click() {
     setButton1Clicked(true);
@@ -48,7 +50,15 @@ export default function ChooseTicketType() {
     if (ticketPrice === 250) ticketTypeId = allTicketTypes.event[1].id;
     if (ticketPrice === 600) ticketTypeId = allTicketTypes.event[2].id;
 
-    createTicket({ ticketTypeId }, token);
+    const ticket = createTicket({ ticketTypeId }, token);
+
+    ticket
+      .then((result) => {
+        setCreatedTicket(result);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
     alert('Tiquete reservado!');
   }
