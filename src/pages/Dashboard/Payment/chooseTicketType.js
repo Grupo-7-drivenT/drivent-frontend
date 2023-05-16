@@ -1,7 +1,6 @@
 import useTicketType from '../../../hooks/api/useTicketType';
 import useToken from '../../../hooks/useToken';
 import { createTicket } from '../../../services/ticketApi';
-import { getAllTicketTypes } from '../../../services/ticketTypeApi';
 import { ButtomWrapper, ReserveTicketButtom, SquareButtom, Wrapper, FinishButtomWrapper } from './payment_styled';
 import { useState } from 'react';
 
