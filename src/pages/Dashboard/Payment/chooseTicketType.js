@@ -1,10 +1,13 @@
+import useTicketType from '../../../hooks/api/useTicketType';
 import useToken from '../../../hooks/useToken';
 import { createTicket } from '../../../services/ticketApi';
+import { getAllTicketTypes } from '../../../services/ticketTypeApi';
 import { ButtomWrapper, ReserveTicketButtom, SquareButtom, Wrapper, FinishButtomWrapper } from './payment_styled';
 import { useState } from 'react';
 
 export default function ChooseTicketType() {
   const token = useToken();
+  const allTicketTypes = useTicketType(false);
   const [button1Clicked, setButton1Clicked] = useState(false);
   const [button2Clicked, setButton2Clicked] = useState(false);
   const [finishButtonClicked, setFinishButtonClicked] = useState(false);
@@ -42,16 +45,15 @@ export default function ChooseTicketType() {
   function hadleFinishButtomClick() {
     let ticketTypeId;
 
-    //Felipe, pegar os ticketsTypesId do banco e passar para parte do cartão
-    if (ticketPrice === 100) ticketTypeId = 30;
-    if (ticketPrice === 250) ticketTypeId = 31;
-    if (ticketPrice === 600) ticketTypeId = 32;
+    if (ticketPrice === 100) ticketTypeId = allTicketTypes.event[0].id;
+    if (ticketPrice === 250) ticketTypeId = allTicketTypes.event[1].id;
+    if (ticketPrice === 600) ticketTypeId = allTicketTypes.event[2].id;
 
     createTicket({ ticketTypeId }, token);
 
     alert('Tiquete reservado!');
   }
-  // Pode substituir pelos atributos do ticketType vindo da API
+
   return (
     <Wrapper>
       <h1>Primeiro, escolha sua modalidade de ingresso</h1>
@@ -78,7 +80,7 @@ export default function ChooseTicketType() {
             >
               Com Hotel
               <br />
-              <span>+ R$ 350</span>
+              <span>+ R$600</span>
             </SquareButtom>
             <SquareButtom
               onClick={() => handleHotelOptionClick('sem-hotel')}
