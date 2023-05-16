@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 export default function ChooseTicketType() {
   const token = useToken();
-  const allTicketTypes = useTicketType(false);
+  const allTicketTypes = useTicketType();
   const [button1Clicked, setButton1Clicked] = useState(false);
   const [button2Clicked, setButton2Clicked] = useState(false);
   const [finishButtonClicked, setFinishButtonClicked] = useState(false);
