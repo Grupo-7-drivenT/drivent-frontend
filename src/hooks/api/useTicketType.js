@@ -11,7 +11,7 @@ export default function useTicketType() {
     loading: eventLoading,
     error: eventError,
     act: getAllTicketTypes,
-  } = useAsync(() => ticketTypeApi.getAllTicketTypes(token),false);
+  } = useAsync(() => ticketTypeApi.getAllTicketTypes(token));
 
   return {
     event,
