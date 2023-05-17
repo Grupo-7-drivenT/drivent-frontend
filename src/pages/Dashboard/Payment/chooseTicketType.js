@@ -5,7 +5,7 @@ import { createTicket } from '../../../services/ticketApi';
 import { ButtomWrapper, ReserveTicketButtom, SquareButtom, Wrapper, FinishButtomWrapper } from './payment_styled';
 import { useState } from 'react';
 
-export default function ChooseTicketType() {
+export default function ChooseTicketType(props) {
   const token = useToken();
   const allTicketTypes = useTicketType();
   const [button1Clicked, setButton1Clicked] = useState(false);
@@ -15,7 +15,7 @@ export default function ChooseTicketType() {
   const [showHotelOptions, setShowHotelOptions] = useState(false);
   const [hotelOptionSelected, setHotelOptionSelected] = useState('');
   const [createdTicket, setCreatedTicket] = useState({});
-
+  
   function handleButton1Click() {
     setButton1Clicked(true);
     setTicketPrice(250);
@@ -23,7 +23,7 @@ export default function ChooseTicketType() {
     setButton2Clicked(false);
     setFinishButtonClicked(false);
     setHotelOptionSelected('');
-  }
+  };
 
   function handleButton2Click() {
     setButton1Clicked(false);
@@ -55,12 +55,11 @@ export default function ChooseTicketType() {
     ticket
       .then((result) => {
         setCreatedTicket(result);
+        props.setChooseTicket(true);
       })
       .catch((error) => {
         console.error(error);
       });
-
-    alert('Tiquete reservado!');
   }
 
   return (
@@ -108,6 +107,7 @@ export default function ChooseTicketType() {
             Fechado! O total ficou em <span>R${ticketPrice}</span>. Agora é só confirmar:
           </h1>
           <br />
+
           <ReserveTicketButtom>RESERVAR INGRESSO</ReserveTicketButtom>
         </FinishButtomWrapper>
       )}
