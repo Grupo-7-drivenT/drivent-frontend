@@ -3,9 +3,11 @@ import Typography from '@material-ui/core/Typography';
 import useEnrollment from '../../hooks/api/useEnrollment';
 import CreditCardInformation from '../../components/PaymentInformation/CreditCard';
 import ChooseTicketType from '../Dashboard/Payment/chooseTicketType';
+import { useState } from 'react';
 
 export default function Payment() {
   const { enrollment } = useEnrollment();
+  const [chooseTicket, setChooseTicket] = useState(false);
 
   if (!enrollment) {
     return (
@@ -23,8 +25,11 @@ export default function Payment() {
   return (
     <>
       <Title>Ingresso e Pagamentos</Title>
-      <ChooseTicketType />
-      {/* <CreditCardInformation /> */}
+      {chooseTicket === false ?
+        <ChooseTicketType setChooseTicket={setChooseTicket} chooseTicket={chooseTicket}/>
+        :
+        <CreditCardInformation />
+      }
     </>
   );
 }
