@@ -10,6 +10,8 @@ import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { getTicket } from '../../services/ticketApi';
 //import { useNavigate } from 'react-router-dom';
 import { getCardType } from './utils/cardHelpers';
+import useTicketType from '../../hooks/api/useTicketType';
+import { getAllTicketTypes } from '../../services/ticketTypeApi';
 //import { getCardType, validateLuhn } from 'react-credit-cards-2/dist/lib/types/utils/cardHelpers.d.ts';
 
 export default function CreditCardInformation({ isPaid }) {
@@ -26,18 +28,21 @@ export default function CreditCardInformation({ isPaid }) {
   const [focus, setFocus] = useState('');
   const [ticket, setTicket] = useState('');
   const [price, setPrice] = useState('');
+  const [name, setName] = useState('');
   const [ticketId, setTicketId] = useState('');
 
   useEffect(() => {
     async function fetchData() {
       const response = await getTicket(userData.token);
+      console.log(response);
       setTicket(response);
       setTicketId(response.id);
-      setPrice(response.TicketType.price);
+      setPrice(response.TicketType.price/100);
+      setName(response.TicketType.name);
     }
     fetchData();
   }, []);
-  
+
   console.log(userData.user.id, 'response');
   console.log(ticketId, 'ticketId', cardData, 'cardData');
 
@@ -53,7 +58,7 @@ export default function CreditCardInformation({ isPaid }) {
   const handleInputFocus = (event) => {
     setFocus(event.target.name);
   };
-  
+
   function postDataCreditCard(e) {
     e.preventDefault();
     const URL = `${process.env.REACT_APP_API_BASE_URL}/payments/process`;
@@ -66,13 +71,9 @@ export default function CreditCardInformation({ isPaid }) {
       URL,
       {
         ticketId: ticketId,
-        userId: userData.user.id,
         cardData: {
           issuer: cardData.issuer,
           number: +cardData.number,
-          name: cardData.name,
-          expirationDate: dayjs(cardData.expirationDate, 'MMYY').toDate(),
-          cvv: +cardData.cvc,
         },
       },
       config
@@ -89,16 +90,9 @@ export default function CreditCardInformation({ isPaid }) {
     <>
       {success || isPaid ? (
         <>
-          <Title>Ingresso e pagamento</Title>
           <Subtitle>Ingresso escolhido</Subtitle>
           <ContainerChooseTicket>
-            <h3>
-              {ticket.ticketTypeId === 1
-                ? 'Presencial + Com Hotel'
-                : ticket.ticketTypeId === 2
-                  ? 'Presencial + Sem Hotel'
-                  : 'Online'}
-            </h3>
+            <h3>{name}</h3>
             <h4>R${price}</h4>
           </ContainerChooseTicket>
           <Paragraph>Pagamento</Paragraph>
@@ -114,16 +108,9 @@ export default function CreditCardInformation({ isPaid }) {
         </>
       ) : (
         <div id="PaymentForm">
-          <Title>Ingresso e pagamento</Title>
           <Subtitle>Ingresso escolhido</Subtitle>
           <ContainerChooseTicket>
-            <h3>
-              {ticket.ticketTypeId === 1
-                ? 'Presencial + Com Hotel'
-                : ticket.ticketTypeId === 2
-                  ? 'Presencial + Sem Hotel'
-                  : 'Online'}
-            </h3>
+            <h3>{name}</h3>
             <h4>R${price}</h4>
           </ContainerChooseTicket>
           <Paragraph>Pagamento</Paragraph>
@@ -341,4 +328,3 @@ const ContainerChooseTicket = styled.section`
     color: #898989;
   }
 `;
-
