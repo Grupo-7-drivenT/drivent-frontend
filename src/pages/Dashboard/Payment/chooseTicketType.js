@@ -1,4 +1,3 @@
-import useTicket from '../../../hooks/api/useTicket';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useToken from '../../../hooks/useToken';
 import { createTicket } from '../../../services/ticketApi';
@@ -14,8 +13,7 @@ export default function ChooseTicketType(props) {
   const [ticketPrice, setTicketPrice] = useState(0);
   const [showHotelOptions, setShowHotelOptions] = useState(false);
   const [hotelOptionSelected, setHotelOptionSelected] = useState('');
-  const [createdTicket, setCreatedTicket] = useState({});
-  
+
   function handleButton1Click() {
     setButton1Clicked(true);
     setTicketPrice(250);
@@ -23,7 +21,7 @@ export default function ChooseTicketType(props) {
     setButton2Clicked(false);
     setFinishButtonClicked(false);
     setHotelOptionSelected('');
-  };
+  }
 
   function handleButton2Click() {
     setButton1Clicked(false);
@@ -53,8 +51,7 @@ export default function ChooseTicketType(props) {
     const ticket = createTicket({ ticketTypeId }, token);
 
     ticket
-      .then((result) => {
-        setCreatedTicket(result);
+      .then(() => {
         props.setChooseTicket(true);
       })
       .catch((error) => {
@@ -88,7 +85,7 @@ export default function ChooseTicketType(props) {
             >
               Com Hotel
               <br />
-              <span>+ R$600</span>
+              <span>+ R$350</span>
             </SquareButtom>
             <SquareButtom
               onClick={() => handleHotelOptionClick('sem-hotel')}
