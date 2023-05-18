@@ -66,7 +66,7 @@ export default function CreditCardInformation({ isPaid }) {
       URL,
       {
         ticketId: ticketId,
-        //userId: userData.user.id,
+        userId: userData.user.id,
         cardData: {
           issuer: cardData.issuer,
           number: +cardData.number,
