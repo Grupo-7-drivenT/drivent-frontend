@@ -1,4 +1,3 @@
-import useTicket from '../../../hooks/api/useTicket';
 import useTicketType from '../../../hooks/api/useTicketType';
 import useToken from '../../../hooks/useToken';
 import { createTicket } from '../../../services/ticketApi';

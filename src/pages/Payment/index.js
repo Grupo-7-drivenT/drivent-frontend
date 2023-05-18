@@ -13,7 +13,6 @@ export default function Payment() {
     return (
       <>
         <TitleTypography variant="h4">Ingresso e pagamento</TitleTypography>
-        <CreditCardInformation></CreditCardInformation>
         <CustomCenter>
           Você precisa completar sua inscrição antes
           <br /> de prosseguir para a escolha de ingresso
