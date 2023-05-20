@@ -2,6 +2,7 @@ import useTickets from '../../../hooks/api/useTicket';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import HotelArea from './hotelArea';
 
 export default function Hotel() {
   const [userTicket, setUserTicket] = useState(null);
@@ -45,6 +46,8 @@ export default function Hotel() {
     return (
       <>
         <TitleTypography variant="h4">Escolha de hotel e quarto</TitleTypography>
+        <SecondTitle>Primeiro escolha seu hotel</SecondTitle>
+        <HotelArea/>
       </>
     );
   }
@@ -70,4 +73,11 @@ const CustomCenter = styled.span`
   color: #8e8e8e;
   font-size: 20px;
   text-align: center;
+`;
+
+const SecondTitle = styled.div`
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px;
+  color: #8E8E8E;
 `;
