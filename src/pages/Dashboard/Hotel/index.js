@@ -2,6 +2,7 @@ import useTickets from '../../../hooks/api/useTicket';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import OptionRoom from '../../../components/OptionRoom';
 
 export default function Hotel() {
   const [userTicket, setUserTicket] = useState(null);
@@ -45,6 +46,7 @@ export default function Hotel() {
     return (
       <>
         <TitleTypography variant="h4">Escolha de hotel e quarto</TitleTypography>
+        <OptionRoom/>
       </>
     );
   }
