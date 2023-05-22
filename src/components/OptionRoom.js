@@ -5,94 +5,153 @@ import UserContext from '../contexts/UserContext';
 import { useEffect } from 'react';
 import { BsPerson } from 'react-icons/bs';
 import { BsFillPersonFill } from 'react-icons/bs';
-import { GetBookingRoom } from '../services/BookingApi';
+import { GetBookingRoom, createBooking } from '../services/BookingApi';
 
-export default function OptionRoom() {
+export default function OptionRoom({ choosedHotelId }) {
   const { userData } = useContext(UserContext);
   const [typeRoom, setTypeRoom] = useState([]);
-  const hotelId = 1;
-  const roomId = 1;
+  const [choosedRoom, setChoosedRoom] = useState(null);
+  const [bookingInfo, setBookingInfo] = useState(null);
+
   useEffect(() => {
     async function fetchData() {
-      const response = await getAllRooms(userData.token, hotelId);
-      console.log(response.Rooms);
+      const response = await getAllRooms(userData.token, +choosedHotelId);
       setTypeRoom(response.Rooms);
     }
     fetchData();
-  }, []);
+  }, [choosedHotelId]);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await GetBookingRoom(roomId, userData.token);
-      console.log(response);
-    }
-    fetchData();
-  }, [roomId]);
+  async function createNewBooking() {
+    await createBooking(choosedRoom, userData.token);
+    return;
+  }
+  return (
+    <Main>
+      {choosedHotelId !== 0 &&
+        <>
+          <h2>Ótima pedida! Agora escolha seu quarto:</h2>
+          <section>
+            <Wrap>
+              {typeRoom.map((t) => <>
+                {t.name === 'Single' &&
+                  <Option
+                    key={t.id}
+                    style={{
+                      backgroundColor: choosedRoom === t.id ? '#FFEED2' : '#FFFFFF',
+                      cursor: 'pointer'
+                    }} onClick={() => setChoosedRoom(t.id)} >
+                    <h1>{t.id}
+                    </h1>
+                    <div>
+                      {choosedRoom === t.id ?
+                        <BsFillPersonFill color='pink' />
+                        :
+                        <BsPerson />
+                      }
+                    </div>
+                  </Option>
+                }
+                {t.name === 'Double' &&
+                  <Option
+                    key={t.id}
+                    style={{
+                      backgroundColor: choosedRoom === t.id ? '#FFEED2' : '#FFFFFF',
+                      cursor: 'pointer'
+                    }} onClick={() => setChoosedRoom(t.id)} >
+                    <h1>{t.id}
+                    </h1>
+                    <div>
+                      {t.capacity === 1 ?
+                        <>
+                          {choosedRoom === t.id ?
+                            <BsFillPersonFill color='pink' />
+                            :
+                            <BsPerson />
+                          }
+                          <BsFillPersonFill />
+                        </>
+                        :
+                        <>
+                          <BsPerson />
+                          {choosedRoom === t.id ?
+                            <BsFillPersonFill color='pink' />
+                            :
+                            <BsPerson />
+                          }
+                        </>
+                      }
+                    </div>
+                  </Option>
+                }
+                {t.name === 'Triple' && t.capacity === 0 &&
+                  <OptionDisable disabled={true}>
+                    <h1>{t.id}
+                    </h1><div>
+                      <BsFillPersonFill />
+                      <BsFillPersonFill />
+                      <BsFillPersonFill />
+                    </div>
+                  </OptionDisable>
+                }
+                {t.name === 'Triple' && t.capacity !== 0 &&
+                  <Option
+                    key={t.id}
+                    style={{
+                      backgroundColor: choosedRoom === t.id ? '#FFEED2' : '#FFFFFF',
+                      cursor: 'pointer'
+                    }} onClick={() => setChoosedRoom(t.id)}
+                  >
+                    <h1>{t.id}
+                    </h1>
 
-  return (<>
-    {typeRoom.map((t) => <>
-      {t.name === 'Single' &&
-        <Option >
-          <h1>{t.id}
-          </h1>
-          <div>
-            <BsPerson />
-          </div>
-        </Option>
+                    <div>
+                      {t.capacity === 1 &&
+                        <>
+                          {choosedRoom === t.id ?
+                            <BsFillPersonFill color='pink' />
+                            :
+                            <BsPerson />
+                          }
+                          <BsFillPersonFill />
+                          <BsFillPersonFill />
+                        </>
+                      }
+                      {t.capacity === 2 &&
+                        <>
+
+                          <BsFillPersonFill />
+                          <BsPerson />
+                          {choosedRoom === t.id ?
+                            <BsFillPersonFill color='pink' />
+                            :
+                            <BsPerson />
+                          }
+                        </>
+                      }
+                      {t.capacity === 3 &&
+                        <>
+                          <BsPerson />
+                          <BsPerson />
+                          {choosedRoom === t.id ?
+                            <BsFillPersonFill color='pink' />
+                            :
+                            <BsPerson />
+                          }
+                        </>
+                      }
+                    </div>
+                  </Option>
+
+                }
+
+              </>)}
+            </Wrap>
+          </section>
+          <button onClick={createNewBooking}>RESERVAR O QUARTO</button>
+        </>
       }
-      {t.name === 'Double' &&
-        <Option >
-          <h1>{t.id}
-          </h1>
-          <div>
-            {t.capacity === 1 ?
-              <>
-                <BsPerson />
-                <BsFillPersonFill />
-              </>
-              :
-              <>
-                <BsPerson />
-                <BsPerson />
-              </>
-            }
-          </div>
-        </Option>
-      }
-      {t.name === 'Triple' &&
-        <Option>
-          <h1>{t.id}
-          </h1>
-
-          <div>
-            {t.capacity === 1 &&
-              <>
-                <BsPerson />
-                <BsFillPersonFill />
-                <BsFillPersonFill />
-              </>
-            }
-            {t.capacity === 2 &&
-              <>
-
-                <BsFillPersonFill />
-                <BsPerson />
-                <BsPerson />
-              </>
-            }
-            {t.capacity === 3 &&
-              <>
-                <BsPerson />
-                <BsPerson />
-                <BsPerson />
-              </>
-            }
-          </div>
-        </Option>
-      }
-
-    </>)}
-  </>);
+    </Main>
+  );
 };
 
 const Option = styled.button`
@@ -114,12 +173,30 @@ display: flex;
 justify-content: space-around;
 align-items: center;
 margin: 0 17px 8px 0;
-background-color: ${(props) => (props.disabled ? 'gray' : 'blue')};
-  color: white;
+background-color: #CECECE;
+  color: #8C8C8C;
   cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   ${(props) =>
     props.disabled &&
     css`
       opacity: 0.5;
     `};
+`;
+const Main = styled.main`
+margin-top: -300px;
+width: 811px;
+height: 260px;
+h2{
+  margin-bottom: 25px;
+}
+`;
+
+const Wrap = styled.section`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 280px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-bottom: 20px;
 `;
