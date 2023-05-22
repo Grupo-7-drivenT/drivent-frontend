@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { getHotels, getHotelsWithRooms } from '../../../services/hotelApi';
 import { useEffect, useState } from 'react';
 import useToken from '../../../hooks/useToken';
-
+import OptionRoom from '../../../components/OptionRoom';
 export default function HotelArea() {
   const token = useToken();
   const [hotels, setHotels] = useState([]);
@@ -11,7 +11,7 @@ export default function HotelArea() {
   useEffect(async() => {
     const allHotels = await getHotels(token);
     setHotels(allHotels);
-  }, []);
+  }, [token]);
 
   async function getAccommodation(hotelId) {
     let allBookings = 0;
@@ -44,43 +44,46 @@ export default function HotelArea() {
   }, [hotels]);
 
   return (
-    <HotelsWrapper>
-      {hotels.map((el) => {
-        const roomNames = el.Rooms.map((room) => room.name);
-        let roomNamesString = '';
+    <>
+      <HotelsWrapper>
+        {hotels.map((el) => {
+          const roomNames = el.Rooms.map((room) => room.name);
+          let roomNamesString = '';
 
-        if (roomNames.length === 2) {
-          roomNamesString = roomNames.join(' e ');
-        } else if (roomNames.length >= 3) {
-          const lastRoomName = roomNames.pop();
-          roomNamesString = `${roomNames.join(', ')} e ${lastRoomName}`;
-        }
+          if (roomNames.length === 2) {
+            roomNamesString = roomNames.join(' e ');
+          } else if (roomNames.length >= 3) {
+            const lastRoomName = roomNames.pop();
+            roomNamesString = `${roomNames.join(', ')} e ${lastRoomName}`;
+          }
 
-        return (
-          <HotelCard
-            key={el.id}
-            style={{
-              backgroundColor: choosedHotelId === el.id ? '#FFEED2' : '#EBEBEB',
-              cursor: 'pointer'
-            }}
-            onClick={() => setChoosedHotelId(el.id)}
-          >
-            <img src={el.image} />
-            <h1>{el.name}</h1>
-            <h2>
-              <span>Tipos de acomodação:</span>
-              <br />
-              {roomNamesString}
-            </h2>
-            <h2>
-              <span>Vagas disponíveis:</span>
-              <br />
-              {el.accommodation}
-            </h2>
-          </HotelCard>
-        );
-      })}
-    </HotelsWrapper>
+          return (
+            <HotelCard
+              key={el.id}
+              style={{
+                backgroundColor: choosedHotelId === el.id ? '#FFEED2' : '#EBEBEB',
+                cursor: 'pointer'
+              }}
+              onClick={() => setChoosedHotelId(el.id)}
+            >
+              <img src={el.image} />
+              <h1>{el.name}</h1>
+              <h2>
+                <span>Tipos de acomodação:</span>
+                <br />
+                {roomNamesString}
+              </h2>
+              <h2>
+                <span>Vagas disponíveis:</span>
+                <br />
+                {el.accommodation}
+              </h2>
+            </HotelCard>
+          );
+        })}
+      </HotelsWrapper>
+      <OptionRoom choosedHotelId={+choosedHotelId} />
+    </>
   );
 }
 const HotelsWrapper = styled.div`

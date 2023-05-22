@@ -2,6 +2,7 @@ import useTickets from '../../../hooks/api/useTicket';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+
 import HotelArea from './hotelArea';
 
 export default function Hotel() {
@@ -46,8 +47,10 @@ export default function Hotel() {
     return (
       <>
         <TitleTypography variant="h4">Escolha de hotel e quarto</TitleTypography>
+
         <SecondTitle>Primeiro escolha seu hotel</SecondTitle>
-        <HotelArea/>
+        <HotelArea />
+
       </>
     );
   }
