@@ -87,7 +87,7 @@ export default function HotelArea() {
   );
 }
 const HotelsWrapper = styled.div`
-  height: 100%;
+  height: auto;
   width: 100%;
   display: flex;
   flex-direction: row;

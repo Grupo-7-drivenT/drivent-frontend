@@ -2,6 +2,7 @@ import useTickets from '../../../hooks/api/useTicket';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
+import Activity from './activity';
 
 export default function Activities() {
   const [userTicket, setUserTicket] = useState(null);
@@ -35,7 +36,8 @@ export default function Activities() {
         <TitleTypography variant="h4">Escolha de atividades</TitleTypography>
         <CustomCenter>
           Sua modalidade de ingresso não necessita escolher atividade.
-          <br />Você terá acesso a todas as atividades
+          <br />
+          Você terá acesso a todas as atividades
         </CustomCenter>
       </>
     );
@@ -45,9 +47,7 @@ export default function Activities() {
     return (
       <>
         <TitleTypography variant="h4">Escolha de atividades</TitleTypography>
-
-        <SecondTitle>Primeiro, filtre pelo dia do evento: </SecondTitle>
-
+        <Activity />
       </>
     );
   }
@@ -55,7 +55,8 @@ export default function Activities() {
   return (
     <CustomCenter>
       Seu pagamento ainda não foi confirmado
-      <br />Não é possível reservar um hotel
+      <br />
+      Não é possível reservar um hotel
     </CustomCenter>
   );
 }
@@ -73,11 +74,4 @@ const CustomCenter = styled.span`
   color: #8e8e8e;
   font-size: 20px;
   text-align: center;
-`;
-
-const SecondTitle = styled.div`
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-  color: #8E8E8E;
 `;
