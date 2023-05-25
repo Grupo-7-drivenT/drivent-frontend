@@ -42,6 +42,8 @@ export default function Activity() {
               return startDateTime.getDate() === 29;
             })
             .map((activity) => (
+              //Nessa parte as atividades devem ser distríbuidas de acordo com a localidade
+              //O tamanho de cada atividade é de 80px por hora, a div deve funcionar como agenda, olhar figma
               <>
                 <br />
                 <div key={activity.id}>{activity.name}</div>
@@ -55,6 +57,8 @@ export default function Activity() {
               return startDateTime.getDate() === 30;
             })
             .map((activity) => (
+              //Nessa parte as atividades devem ser distríbuidas de acordo com a localidade
+              //O tamanho de cada atividade é de 80px por hora, a div deve funcionar como agenda, olhar figma
               <>
                 <br />
                 <div key={activity.id}>{activity.name}</div>
@@ -68,6 +72,8 @@ export default function Activity() {
               return startDateTime.getDate() === 31;
             })
             .map((activity) => (
+              //Nessa parte as atividades devem ser distríbuidas de acordo com a localidade
+              //O tamanho de cada atividade é de 80px por hora, a div deve funcionar como agenda, olhar figma
               <>
                 <br />
                 <div key={activity.id}>{activity.name}</div>
