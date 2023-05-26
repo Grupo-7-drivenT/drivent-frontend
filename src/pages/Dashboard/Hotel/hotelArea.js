@@ -37,6 +37,17 @@ export default function HotelArea() {
     }
   }, [hotels]);
 
+  const getHotelsInfos = () => {
+    for (let el of hotels) {
+      for (let ely of el.Rooms) {
+        const findBooking = ely.Booking?.find(fel => fel.userId === userData.user.id);
+        if (findBooking) {
+          return findBooking;
+        }
+      }
+    }
+  };
+
   const backRoom = () => {
     setHotelData(null);
     setChangingHotel(true);
@@ -85,14 +96,17 @@ export default function HotelArea() {
             <img src={hotelData.image} />
             <h1>{hotelData.name}</h1>
             <h2>
-              <span>Tipos de acomodação:</span>
+              <span>Quarto reservado: </span>
               <br />
-              {hotelData.roomNamesString}
+              {getHotelsInfos()?.roomId}
             </h2>
             <h2>
               <span>Vagas disponíveis:</span>
               <br />
-              {hotelData.accommodation}
+              {hotelData.Rooms.reduce(
+                (accumulator, currentValue) => accumulator + (currentValue.capacity - currentValue.Booking.length),
+                0
+              )}
             </h2>
           </HotelCard>
           : hotels.map((el, i) => {
