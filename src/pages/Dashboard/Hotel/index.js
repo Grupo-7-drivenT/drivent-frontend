@@ -37,7 +37,8 @@ export default function Hotel() {
         <TitleTypography variant="h4">Escolha de hotel e quarto</TitleTypography>
         <CustomCenter>
           Sua modalidade de ingresso não inclui hospedagem
-          <br />Prossiga para a escolha de atividades
+          <br />
+          Prossiga para a escolha de atividades
         </CustomCenter>
       </>
     );
@@ -47,10 +48,7 @@ export default function Hotel() {
     return (
       <>
         <TitleTypography variant="h4">Escolha de hotel e quarto</TitleTypography>
-
-        <SecondTitle>Primeiro escolha seu hotel</SecondTitle>
         <HotelArea />
-
       </>
     );
   }
@@ -58,7 +56,8 @@ export default function Hotel() {
   return (
     <CustomCenter>
       Seu pagamento ainda não foi confirmado
-      <br />Não é possível reservar um hotel
+      <br />
+      Não é possível reservar um hotel
     </CustomCenter>
   );
 }
@@ -78,9 +77,3 @@ const CustomCenter = styled.span`
   text-align: center;
 `;
 
-const SecondTitle = styled.div`
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 23px;
-  color: #8E8E8E;
-`;
