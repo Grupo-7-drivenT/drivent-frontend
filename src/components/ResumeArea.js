@@ -63,8 +63,8 @@ export default function ResumeArea() {
     if (myBooking.Room) {
       const { capacity } = myBooking.Room;
       if (capacity === 1) return 'Só Você';
-      if (capacity === 2) return 'Você e mais um';
-      if (capacity === 3) return 'Você e mais dois';
+      if (capacity === 2) return 'Você e mais 1';
+      if (capacity === 3) return 'Você e mais 2';
     }
     return '';
   }

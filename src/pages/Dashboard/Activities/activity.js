@@ -19,7 +19,7 @@ export default function Activity() {
   const handleClick = (day) => {
     setSelectedButton(day);
   };
-
+  console.log(activities);
   return (
     <>
       {selectedButton === '' && <SecondTitle>Primeiro, filtre pelo dia do evento: </SecondTitle>}

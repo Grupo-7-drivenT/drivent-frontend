@@ -5,7 +5,6 @@ import UserContext from '../contexts/UserContext';
 import { useEffect } from 'react';
 import { BsPerson, BsFillPersonFill } from 'react-icons/bs';
 import { createBooking } from '../services/BookingApi';
-import { useNavigate } from 'react-router-dom';
 
 export default function OptionRoom({ choosedHotelId }) {
   const { userData } = useContext(UserContext);
